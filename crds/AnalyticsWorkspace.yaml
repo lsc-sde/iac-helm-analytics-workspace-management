@@ -1,0 +1,134 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: analyticsworkspaces.xlscsde.nhs.uk
+spec:
+  scope: Namespaced
+  group: xlscsde.nhs.uk
+  names:
+    kind: AnalyticsWorkspace
+    plural: analyticsworkspaces
+    singular: analyticsworkspace
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties: 
+                displayName:
+                  type: string
+                  description: REQUIRED. The short display name used as the title for the workspace.
+                description:
+                  type: string
+                  description: REQUIRED. A simple description which can be multiple lines describing the workspace
+                validity:
+                  type: object
+                  description: REQUIRED. An object describing variables which are validated to ensure that the workspace is still valid
+                  required:
+                  - availableFrom
+                  - expires
+                  properties:
+                    availableFrom:
+                      type: string
+                      format: date
+                      description: The date that the workspace is valid from
+                    expires:
+                      type: string
+                      format: date
+                      description: The date that the workspace expires      
+                virtualMachineWorkspace:
+                  type: object
+                  description: This is not yet implemented, it is to test validation of the CRD is functioning correctly
+                  properties:
+                    maxHosts: 
+                      description: The maximum number of hosts
+                      x-kubernetes-int-or-string: true
+                      anyOf:
+                      - type: integer   
+                      - type: string
+                jupyterWorkspace:
+                  type: object
+                  description: Represents a jupyter workspace
+                  required:
+                  - image
+                  properties:
+                    image: 
+                      type: string
+                      description: The image used when provisioning the pod created by jupyter hub
+                      pattern: "^[a-z0-9\\-\\/]*\\:([a-zA-Z0-9\\-\\_\\.]*)"
+                    extraLabels:
+                      type: object
+                      description: A map of labels to append to the pod created
+                      additionalProperties:
+                        type: string
+                    defaultUri:
+                      type: string
+                      description: The URI that jupyter will use when the items are provisioned.
+                    nodeSelector:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                    tolerations:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                    resources:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                    additionalStorage:
+                      type: array
+                      description: |
+                        A list of additional persistent volume claims to map to the pods created for this environment. 
+                        
+                        If the PVC doesn't already exist, it will be created with the options here.
+                      items:
+                        type: object
+                        properties:
+                          mountPath:
+                            type: string
+                            description: The directory to mount this storage in the claim
+                          persistentVolumeClaim:
+                            type: string
+                            description: The name of the persistent volume claim to apply
+                          storageClassName:
+                            type: string
+                            description: |
+                              The storage class name applied to the persistent volume claim (if it doesn't already exist).
+
+                              This defaults to the jupyterhub default storage class
+              oneOf:
+                - properties:
+                  required:
+                  - jupyterWorkspace
+
+                - properties:
+                  required: 
+                  - virtualMachineWorkspace   
+              required:
+                - displayName
+                - description
+                - validity           
+            status:
+              type: object
+              properties:
+                statusText:
+                  type: string
+                  default: "Waiting"
+                  pattern: "^Waiting|Provisioning|In-use"
+                  nullable: false
+
+      additionalPrinterColumns:
+      - name: DisplayName
+        type: string
+        jsonPath: .spec.displayName
+
+      - name: Expires
+        type: string
+        jsonPath: .spec.validity.expires
+
+      - name: Status
+        type: string
+        jsonPath: .status.statusText
