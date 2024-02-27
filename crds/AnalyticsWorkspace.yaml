@@ -117,7 +117,7 @@ spec:
                 statusText:
                   type: string
                   default: "Waiting"
-                  pattern: "^Waiting|Provisioning|In-use"
+                  pattern: "^Waiting|Provisioning|In-use|Expired"
                   nullable: false
 
       additionalPrinterColumns:
