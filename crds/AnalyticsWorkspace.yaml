@@ -78,6 +78,26 @@ spec:
                     resources:
                       type: object
                       x-kubernetes-preserve-unknown-fields: true
+                    persistentVolumeClaim:
+                      type: object
+                      description:
+                      properties:
+                        storageClassName:
+                          type: string
+                          description: |
+                            The name of the storage class to create the persistent volume claim.
+
+                            If not populated, it will default to the system default
+                            
+                            This is only applied when a PVC is initially created, it is ignored otherwise.
+
+                        name:
+                          type: string
+                          description: |
+                            The name of the default persistent volume claim to associate with this workspace.
+                            
+                            If not populated, it will use the workspace name to generate a new name for the PVC automatically
+
                     additionalStorage:
                       type: array
                       description: |
@@ -118,7 +138,15 @@ spec:
                   type: string
                   default: "Waiting"
                   nullable: false
-      
+                persistentVolumeClaim:
+                  type: string
+                  description: The Persistent Volume Claim associated with this workspace
+                additionalStorage:
+                  type: object
+                  description: A map of storage alongside the name of the matching Persistent Volume Claim
+                  additionalProperties:
+                    type: string
+                      
       subresources:
         status: {}
       additionalPrinterColumns:
@@ -133,3 +161,7 @@ spec:
       - name: Status
         type: string
         jsonPath: .status.statusText
+
+      - name: StorageClaim
+        type: string
+        jsonPath: .status.persistentVolumeClaim

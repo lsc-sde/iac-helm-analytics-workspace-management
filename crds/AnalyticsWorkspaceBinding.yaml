@@ -20,6 +20,9 @@ spec:
             spec:
               type: object
               properties: 
+                comments:
+                  type: string
+                  description: Any comments relating to this binding.
                 workspace:
                   type: string
                   description: REQUIRED. The name of the workspace in kubernetes
@@ -57,7 +60,15 @@ spec:
               required:
                 - workspace
                 - expires
+            status:
+              type: object
+              properties:
+                statusText:
+                  type: string
+                  nullable: false
       
+      subresources:
+        status: {}
       additionalPrinterColumns:
       - name: Workspace
         type: string
@@ -66,3 +77,11 @@ spec:
       - name: Expires
         type: string
         jsonPath: .spec.expires
+
+      - name: Status
+        type: string
+        jsonPath: .status.statusText
+
+      - name: Comments
+        type: string
+        jsonPath: .spec.comments
