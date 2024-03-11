@@ -24,7 +24,7 @@ jobs:
     uses: lsc-sde/lsc-sde/.github/workflows/update-submodules.yaml@main
     needs: 
     - semver
-    - sandbox
+    - package
     with:
       symver: ${{ needs.semver.outputs.GitVersion_SemVer }}
       directory: iac/helm/repository
