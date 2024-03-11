@@ -17,6 +17,7 @@ jobs:
     needs: semver
     with:
       symver: ${{ needs.semver.outputs.GitVersion_SemVer }}
+      directory: iac/helm/analytics-workspace-management
     secrets: inherit
 
 
@@ -27,5 +28,5 @@ jobs:
     - package
     with:
       symver: ${{ needs.semver.outputs.GitVersion_SemVer }}
-      directory: iac/helm/repository
+      directory: iac/helm/analytics-workspace-management
     secrets: inherit
