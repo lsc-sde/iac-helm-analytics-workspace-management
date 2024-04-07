@@ -1,5 +1,5 @@
 replicas: 1
-image: lscsde/analytics-workspace-mgmt:0.1.5
+image: lscsde/analytics-workspace-mgmt:0.1.6
 nodeSelector: {}
 tolerations: []
 volumes: []
