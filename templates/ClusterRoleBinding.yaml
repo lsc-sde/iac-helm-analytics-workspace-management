@@ -5,7 +5,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "analytics-workspace-management.operator.name" . }}
+  name: {{ include "analytics-workspace-management.admin.name" . }}
 subjects:
 - kind: ServiceAccount
   name: {{ .Release.Name }}
