@@ -1,2 +1,20 @@
-include:
-  examples: false
+replicas: 1
+image: lscsde/analytics-workspace-mgmt:0.1.4
+nodeSelector: {}
+tolerations: []
+volumes: []
+volumeMounts: []
+env: []
+resources: {}
+
+ingress:
+  enabled: false
+  className: nginx
+  host: "workspace-mgmt.xlscsde.local"
+  annotations: {}
+  tls:
+    enabled: false
+    secretName: ""
+
+service:
+  port: "8000"
