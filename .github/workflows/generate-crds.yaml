@@ -11,8 +11,8 @@ jobs:
   build-java-crd:
     uses: lsc-sde/lsc-sde/.github/workflows/generate-java-crds.yaml@main
     with:
+      repository: lsc-sde/java-analytics-workspace-management-models
       crds: 'templates/AnalyticsWorkspace.yaml,templates/AnalyticsWorkspaceBinding.yaml'
       generatingJavaPackage: uk.nhs.xlscsde.analytics.workspace.management
       crdApiGroupPrefix: uk.nhs.xlscsde
     secrets: inherit
-
