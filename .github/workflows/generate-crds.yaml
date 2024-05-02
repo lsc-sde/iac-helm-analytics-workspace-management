@@ -13,3 +13,4 @@ jobs:
       crds: 'templates/AnalyticsWorkspace.yaml,templates/AnalyticsWorkspaceBinding.yaml'
       generatingJavaPackage: uk.nhs.xlscsde.analytics.workspace.management
     secrets: inherit
+    
