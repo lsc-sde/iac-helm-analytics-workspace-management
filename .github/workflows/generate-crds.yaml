@@ -10,6 +10,6 @@ jobs:
   build-java-crd:
     uses: lsc-sde/lsc-sde/.github/workflows/generate-java-crds.yaml@main
     with:
-      crds: './templates/AnalyticsWorkspace.yaml,./templates/AnalyticsWorkspaceBinding.yaml'
+      crds: 'templates/AnalyticsWorkspace.yaml,templates/AnalyticsWorkspaceBinding.yaml'
       generatingJavaPackage: uk.nhs.xlscsde.analytics.workspace.management
     secrets: inherit
