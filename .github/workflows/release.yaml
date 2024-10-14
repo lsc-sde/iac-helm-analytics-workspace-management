@@ -13,3 +13,14 @@ jobs:
       directory: iac/helm/analytics-workspace-management
       yamlPath: analytics_workspace_management
     secrets: inherit
+
+  build-java-crd:
+    needs:
+    - release
+    uses: lsc-sde/lsc-sde/.github/workflows/generate-java-crds.yaml@main
+    with:
+      repository: lsc-sde/java-analytics-workspace-management-models
+      crds: 'templates/AnalyticsWorkspace.yaml,templates/AnalyticsWorkspaceBinding.yaml'
+      generatingJavaPackage: io.github.lsc.sde.analytics.workspace.management
+      crdApiGroupPrefix: uk.nhs.xlscsde
+    secrets: inherit
