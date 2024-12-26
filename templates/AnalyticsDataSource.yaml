@@ -1,0 +1,87 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: analyticsdatasources.xlscsde.nhs.uk
+spec:
+  scope: Namespaced
+  group: xlscsde.nhs.uk
+  names:
+    kind: AnalyticsDataSource
+    plural: analyticsdatasources
+    singular: analyticsdatasource
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties: 
+                type:
+                  type: string
+                  description: The type of data source
+                displayName:
+                  type: string
+                  description: Display name of the data source
+                description:
+                  type: string
+                  description: A description of the data source
+                license:
+                  type: string
+                  description: A description of the license for this data dource
+
+                project:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The Unique ID of the project in question
+
+                connections:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        description: The type of description being configured
+                      name:
+                        type: string
+                        description: The name of the connection
+
+                approvals:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: The name of the approver
+                      email:
+                        type: string
+                        description: The email address of the approver
+                      jobTitle:
+                        type: string
+                        description: The job title of the approver
+                      approvalGiven:
+                        type: string
+                        format: date-time
+                        description: The time at which approval was given by the user
+            status:
+              type: object
+              properties:
+                statusText:
+                  type: string
+      subresources:
+        status: {}
+      additionalPrinterColumns:
+      - name: Title
+        type: string
+        jsonPath: .spec.title
+
+      - name: Status
+        type: string
+        jsonPath: .status.statusText
