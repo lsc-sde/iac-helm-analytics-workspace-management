@@ -121,7 +121,7 @@ spec:
                               The storage class name applied to the persistent volume claim (if it doesn't already exist).
 
                               This defaults to the jupyterhub default storage class
-              oneOf:
+              anyOf:
                 - properties:
                   required:
                   - jupyterWorkspace

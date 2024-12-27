@@ -33,6 +33,22 @@ spec:
                   type: string
                   description: A description of the license for this data dource
 
+                publisher:
+                  type: object
+                  properties:
+                    organisation:
+                      type: string
+                      description: Name of the organisation
+                    contact:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the contact
+                        role:
+                          type: string
+                          description: The role of this contact
+                
                 project:
                   type: object
                   properties:
@@ -51,12 +67,82 @@ spec:
                       name:
                         type: string
                         description: The name of the connection
+                      
+                      connectionString:
+                        type: object
+                        properties:
+                          secretName:
+                            type: string
+                            description: If the connection string contains secrets, populate a secret and reference it here
+                          value:
+                            type: string
+                            description: If the connection string doesn't contain secrets, populate it here.
+                        anyOf:
+                          - properties:
+                            required:
+                            - secretName
+                          - properties:
+                            required:
+                            - value
+                      databricksConnection:
+                        type: object
+                        properties:
+                          hostName:
+                            type: string
+                            description: The hostname of the databricks instance
+                          httpPath:
+                            type: string
+                            description: The path of the databricks instance
+                          personalAccessToken:
+                            type: object
+                            properties:
+                              secretName: 
+                                type: string
+                                description: Name of the secret that contains the personal access token related to this datasource
+                              secretKey:
+                                type: string
+                                description: The key in the secret that contains token
+                                default: TOKEN
+                          oauth2Token:
+                            type: object
+                            properties:
+                              secretName: 
+                                type: string
+                                description: Name of the secret that contains the oauth2 token related to this datasource
+                              secretKey:
+                                type: string
+                                description: The key in the secret that contains token
+                                default: TOKEN
+                          servicePrinciple:
+                            type: object
+                            properties:
+                              secretName: 
+                                type: string
+                                description: Name of the secret that contains the oauth2 token related to this datasource
+                              
 
+                        anyOf:
+                          - properties:
+                            required:
+                            - personalAccessToken
+                          - properties:
+                            required:
+                            - oauth2Token
+                    anyOf:
+                      - properties:
+                        required:
+                        - connectionString
+                      - properties:
+                        required:
+                        - databricksConnection                                
                 approvals:
                   type: array
                   items:
                     type: object
                     properties:
+                      type:
+                        type: string
+                        description: The type of approval being given
                       name:
                         type: string
                         description: The name of the approver
@@ -70,6 +156,12 @@ spec:
                         type: string
                         format: date-time
                         description: The time at which approval was given by the user
+                    required:
+                    - type
+                    - name
+                    - email
+                    - jobTitle
+                    - approvalGiven
             status:
               type: object
               properties:

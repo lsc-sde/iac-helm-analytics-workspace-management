@@ -29,15 +29,40 @@ spec:
                 expires:
                   type: string
                   format: date
-                  description: REQUIRED. The date at which this binding expires 
+                  description: The date at which this binding expires 
                 datasource:
                   type: string
                   description: The datasource to match
-
+                approvals:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        description: The type of approval being given
+                      name:
+                        type: string
+                        description: The name of the approver
+                      email:
+                        type: string
+                        description: The email address of the approver
+                      jobTitle:
+                        type: string
+                        description: The job title of the approver
+                      approvalGiven:
+                        type: string
+                        format: date-time
+                        description: The time at which approval was given by the user
+                    required:
+                    - type
+                    - name
+                    - email
+                    - jobTitle
+                    - approvalGiven
               required:
                 - workspace
                 - datasource
-                - expires
             status:
               type: object
               properties:
@@ -55,10 +80,6 @@ spec:
       - name: DataSource
         type: string
         jsonPath: .spec.datasource
-
-      - name: Expires
-        type: string
-        jsonPath: .spec.expires
 
       - name: Status
         type: string
