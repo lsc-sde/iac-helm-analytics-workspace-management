@@ -4,11 +4,11 @@ metadata:
   name: {{ include "analytics-workspace-management.operator.name" . }}
 rules:
 - apiGroups: ["xlscsde.nhs.uk"]
-  resources: ["analyticsworkspaces","analyticsworkspacebindings"]
+  resources: ["analyticsworkspaces","analyticsworkspacebindings","analyticsdatasources","analyticsdatasourcebindings"]
   verbs: ["get","watch","list"]
 
 - apiGroups: ["xlscsde.nhs.uk"]
-  resources: ["analyticsworkspaces/status", "analyticsworkspacebindings/status"]
+  resources: ["analyticsworkspaces/status", "analyticsworkspacebindings/status","analyticsdatasources/status","analyticsdatasourcebindings/status"]
   verbs: ["get","patch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -17,5 +17,5 @@ metadata:
   name: {{ include "analytics-workspace-management.admin.name" . }}
 rules:
 - apiGroups: ["xlscsde.nhs.uk"]
-  resources: ["analyticsworkspaces","analyticsworkspacebindings", "analyticsworkspaces/status", "analyticsworkspacebindings/status"]
+  resources: ["analyticsworkspaces","analyticsworkspacebindings", "analyticsworkspaces/status", "analyticsworkspacebindings/status","analyticsdatasources","analyticsdatasourcebindings","analyticsdatasources/status","analyticsdatasourcebindings/status"]
   verbs: ["*"]

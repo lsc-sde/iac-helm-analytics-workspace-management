@@ -9,6 +9,11 @@ spec:
     kind: AnalyticsWorkspace
     plural: analyticsworkspaces
     singular: analyticsworkspace
+    shortNames:
+    - aws
+    categories:
+    - krap
+    - krap-core
   versions:
     - name: v1
       served: true

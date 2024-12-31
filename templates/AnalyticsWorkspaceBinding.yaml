@@ -9,6 +9,10 @@ spec:
     kind: AnalyticsWorkspaceBinding
     plural: analyticsworkspacebindings
     singular: analyticsworkspacebinding
+    shortNames:
+    - awsb
+    categories:
+    - krap
   versions:
     - name: v1
       served: true

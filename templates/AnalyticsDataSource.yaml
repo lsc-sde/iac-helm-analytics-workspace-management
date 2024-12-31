@@ -9,6 +9,11 @@ spec:
     kind: AnalyticsDataSource
     plural: analyticsdatasources
     singular: analyticsdatasource
+    shortNames:
+    - ads
+    categories:
+    - krap
+    - krap-core
   versions:
     - name: v1
       served: true
@@ -68,6 +73,22 @@ spec:
                         type: string
                         description: The name of the connection
                       
+                      rocreate:
+                        type: object
+                        properties:
+                          path:
+                            type: string
+                          spec:
+                            type: object
+                            x-kubernetes-preserve-unknown-fields: true
+                        anyOf:
+                          - properties:
+                            required:
+                            - spec
+                          - properties:
+                            required:
+                            - path
+                          
                       connectionString:
                         type: object
                         properties:
@@ -170,9 +191,9 @@ spec:
       subresources:
         status: {}
       additionalPrinterColumns:
-      - name: Title
+      - name: Name
         type: string
-        jsonPath: .spec.title
+        jsonPath: .spec.displayName
 
       - name: Status
         type: string

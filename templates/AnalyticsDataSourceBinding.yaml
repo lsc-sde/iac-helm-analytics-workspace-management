@@ -9,6 +9,10 @@ spec:
     kind: AnalyticsDataSourceBinding
     plural: analyticsdatasourcebindings
     singular: analyticsdatasourcebinding
+    shortNames:
+    - adsb
+    categories:
+    - krap
   versions:
     - name: v1
       served: true
