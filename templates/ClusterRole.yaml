@@ -17,5 +17,13 @@ metadata:
   name: {{ include "analytics-workspace-management.admin.name" . }}
 rules:
 - apiGroups: ["xlscsde.nhs.uk"]
-  resources: ["analyticsworkspaces","analyticsworkspacebindings", "analyticsworkspaces/status", "analyticsworkspacebindings/status","analyticsdatasources","analyticsdatasourcebindings","analyticsdatasources/status","analyticsdatasourcebindings/status"]
+  resources: 
+  - "analyticsworkspaces"
+  - "analyticsworkspacebindings"
+  - "analyticsworkspaces/status"
+  - "analyticsworkspacebindings/status"
+  - "analyticsdatasources"
+  - "analyticsdatasourcebindings"
+  - "analyticsdatasources/status"
+  - "analyticsdatasourcebindings/status"
   verbs: ["*"]
