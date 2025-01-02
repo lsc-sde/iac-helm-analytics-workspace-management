@@ -73,11 +73,25 @@ spec:
                         type: string
                         description: The name of the connection
                       
-                      rocreate:
+                      roCrate:
                         type: object
                         properties:
-                          path:
-                            type: string
+                          repo:
+                            type: object
+                            properties:
+                              url:
+                                type: string
+                                description: The URL to the github repo
+                              path:
+                                type: string
+                                description: The path where the ro-crate file is found on the repo
+                              secretName:
+                                type: string
+                                description: The name of the secret used when accessing the repo
+                              secretKey:
+                                type: string
+                                description: The key of the secret used when accessing the repo
+                                default: TOKEN
                           spec:
                             type: object
                             x-kubernetes-preserve-unknown-fields: true
