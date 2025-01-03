@@ -20,7 +20,7 @@ jobs:
     uses: lsc-sde/lsc-sde/.github/workflows/generate-java-crds.yaml@main
     with:
       repository: lsc-sde/java-analytics-workspace-management-models
-      crds: 'templates/AnalyticsWorkspace.yaml,templates/AnalyticsWorkspaceBinding.yaml,templates/AnalyticsCrate.yaml,,templates/AnalyticsDataSource.yaml,templates/AnalyticsDataSourceBinding.yaml'
+      crds: 'templates/AnalyticsWorkspace.yaml,templates/AnalyticsWorkspaceBinding.yaml,templates/AnalyticsCrate.yaml,templates/AnalyticsDataSource.yaml,templates/AnalyticsDataSourceBinding.yaml'
       generatingJavaPackage: io.github.lsc.sde.analytics.workspace.management
       crdApiGroupPrefix: uk.nhs.xlscsde
     secrets: inherit
