@@ -87,7 +87,7 @@ spec:
                       x-kubernetes-preserve-unknown-fields: true
                     persistentVolumeClaim:
                       type: object
-                      description:
+                      description: a description of the persistent volume claim provisioned for the workspace
                       properties:
                         storageClassName:
                           type: string
