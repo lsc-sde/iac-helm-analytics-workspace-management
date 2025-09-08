@@ -65,7 +65,7 @@ spec:
                     image: 
                       type: string
                       description: The image used when provisioning the pod created by jupyter hub
-                      pattern: "^[a-z0-9\\-\\/]*\\:([a-zA-Z0-9\\-\\_\\.]*)"
+                      # pattern: "^[a-z0-9\\-\\/]*\\:([a-zA-Z0-9\\-\\_\\.]*)"
                     extraLabels:
                       type: object
                       description: A map of labels to append to the pod created
